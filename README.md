@@ -21,3 +21,8 @@ $ pip wheel --wheel-dir=/tmp/SomePackage SomePackage
 ```
 $ pip install --no-index --find-links=/tmp/SomePackage SomePackage
 ```
+
+## Miscellaneous
+1. https://s3-ap-southeast-1.amazonaws.com/s3-file-upload-temp-repo/py-deps.tar.gz  
+2. https://s3-ap-southeast-1.amazonaws.com/s3-file-upload-temp-repo/py-mysql-deps_latest.tar.gz  
+3. https://s3-ap-southeast-1.amazonaws.com/s3-file-upload-temp-repo/yumcache.tar.gz
