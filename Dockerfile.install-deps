@@ -1,0 +1,7 @@
+FROM centos:7
+
+USER root
+
+ADD deps/yumcache.tar.gz /var/cache
+ADD deps/py-deps.tar.gz /tmp
+
