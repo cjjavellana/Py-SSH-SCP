@@ -20,6 +20,15 @@ RUN yum install -y epel-release -C && \
  yum install -y python-devel -C && \
  yum install -y mysql-devel -C && \
  pip install --no-index --find-links=/tmp/fabric fabric && \
- pip install --no-index --find-links=/tmp/MySQL-python MySQL-python
+ pip install --no-index --find-links=/tmp/MySQL-python MySQL-python && \
+ pip install --no-index --find-links=/tmp/Flask Flask && \
+ pip install --no-index --find-links=/tmp/Flask-Migrate Flask-Migrate && \
+ pip install --no-index --find-links=/tmp/Flask-Moment Flask-Moment && \
+ pip install --no-index --find-links=/tmp/Flask-Redis Flask-Redis && \
+ pip install --no-index --find-links=/tmp/Flask-SQLAlchemy Flask-SQLAlchemy && \
+ pip install --no-index --find-links=/tmp/Flask-Script Flask-Script && \
+ pip install --no-index --find-links=/tmp/Flask-WTF Flask-WTF && \
+ pip install --no-index --find-links=/tmp/redis redis && \
+ pip install --no-index --find-links=/tmp/mockredispy mockredispy
 
 

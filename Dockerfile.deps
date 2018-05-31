@@ -15,8 +15,19 @@ RUN sed -i -e 's/keepcache=0/keepcache=1/g' /etc/yum.conf && \
   pip install wheel && \
   pip wheel --wheel-dir=/tmp/fabric fabric && \
   pip wheel --wheel-dir=/tmp/MySQL-python MySQL-python && \
+  pip wheel --wheel-dir=/tmp/Flask Flask && \
+  pip wheel --wheel-dir=/tmp/Flask-Migrate Flask-Migrate && \
+  pip wheel --wheel-dir=/tmp/Flask-Moment Flask-Moment && \
+  pip wheel --wheel-dir=/tmp/Flask-Redis Flask-Redis && \
+  pip wheel --wheel-dir=/tmp/Flask-SQLAlchemy Flask-SQLAlchemy && \
+  pip wheel --wheel-dir=/tmp/Flask-Script Flask-Script && \
+  pip wheel --wheel-dir=/tmp/Flask-WTF Flask-WTF && \
+  pip wheel --wheel-dir=/tmp/redis redis && \
+  pip wheel --wheel-dir=/tmp/mockredispy mockredispy && \
   cd /var/cache && \
   tar czvf /tmp/yumcache.tar.gz yum && \
   cd /tmp && \
-  tar czvf /tmp/py-deps.tar.gz MySQL-python fabric wheel
+  tar czvf /tmp/py-deps.tar.gz MySQL-python fabric wheel Flask \
+    Flask-Migrate Flask-Moment Flask-Redis Flask-SQLAlchemy \
+    Flask-Script Flask-WTF redis mockredispy
 
