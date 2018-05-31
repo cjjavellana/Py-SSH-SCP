@@ -2,6 +2,24 @@ FROM centos:7
 
 USER root
 
-ADD deps/yumcache.tar.gz /var/cache
 ADD deps/py-deps.tar.gz /tmp
+ADD deps/yumcache.tar.gz /var/cache
+
+# RUN yum install -y wget && \
+# cd /tmp && \
+# wget https://s3-ap-southeast-1.amazonaws.com/s3-file-upload-temp-repo/py-deps.tar.gz && \
+# wget https://s3-ap-southeast-1.amazonaws.com/s3-file-upload-temp-repo/yumcache.tar.gz && \
+# tar xzvf yumcache.tar.gz -C /var/cache && \
+# tar xzvf py-deps.tar.gz -C /tmp
+
+# install from cache
+RUN yum install -y epel-release -C && \
+ yum install -y python-setuptools -C && \
+ yum install -y python-pip -C && \
+ yum install -y openssh-clients -C && \
+ yum install -y python-devel -C && \
+ yum install -y mysql-devel -C && \
+ pip install --no-index --find-links=/tmp/fabric fabric && \
+ pip install --no-index --find-links=/tmp/MySQL-python MySQL-python
+
 
