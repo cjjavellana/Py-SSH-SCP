@@ -16,7 +16,8 @@ class ScpCopy(object):
     local - The local destination to copy the file to. If None, resolves 
      os.getcwd()
     '''
-    self.logger.info('Copying file {} from {}'.format(remotefile, self.connection.host))
+    self.logger.info('Copying (remote) {} from {} to (local) {}'.format(
+      remotefile, self.connection.host, local))
     self.connection.get(remotefile, local)
 
   def get_matches(self, remotedir, filepattern, local=None):
@@ -26,14 +27,17 @@ class ScpCopy(object):
     files = self._listfiles(remotedir, filepattern)
     self.logger.info('Search Result for {}/{} => {}'.format(remotedir, filepattern, files))
 
-    for f in files:
-      self.get(f, local)
-
     base = os.getcwd() if local is None else local
     if not base.endswith(os.sep):
       base = ''.join([base, '/'])
 
-    return [''.join([base, os.path.basename(f)]) for f in files]
+    copied_files = []
+    for f in files:
+      stagedfiled = ''.join([base, os.path.basename(f)])
+      self.get(f, stagedfiled)
+      copied_files.append(stagedfiled)
+
+    return copied_files
 
   def _listfiles(self, remotedir, filepattern):
     r = self.connection.run('for f in `ls {}/{}`; do echo $f; done;'.format(remotedir, filepattern),

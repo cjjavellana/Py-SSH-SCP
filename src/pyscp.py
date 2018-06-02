@@ -30,6 +30,8 @@ def parse_args(argv):
   parser.add_argument('--workdir', 
     help='The local directory to stage downloaded files', default='/tmp/workdir',
     dest="workdir")
+  parser.add_argument('--uploadtimeout', type=int, default=30, 
+    help='The upload timeout. Default 30 secs', dest="uploadtimeout")
   return parser.parse_args()
 
 def copy(options):
@@ -40,8 +42,11 @@ def copy(options):
   with Connection(options.host, user=options.user, port=options.port,
     connect_timeout=10, connect_kwargs={"key_filename": options.keyfile}) as c:
     scpcopy = ScpCopy(c)
-    scpcopy.get_matches(options.remotedir, options.filename, options.workdir)
-  
+    return scpcopy.get_matches(options.remotedir, options.filename, options.workdir)
+
+def upload(files, options):
+  pass
+
 def setup_logging(
     default_path='logging.yaml',
     default_level=logging.INFO,
@@ -67,7 +72,8 @@ def main():
 
   logger = logging.getLogger(__name__)
   options = parse_args(sys.argv[1:])
-  copy(options)
+  copied_files = copy(options)
+  upload(copied_files, options)
 
 setup_logging()
 if __name__ == '__main__':
