@@ -4,7 +4,7 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(0, '{}/../src'.format(dir_path))
 
 from scpcopy import ScpCopy
-from httpuploader import HttpUploader
+from httpuploader import Upload
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -32,18 +32,21 @@ class RemoteFileCopyTestCase(unittest.TestCase):
     self.assertEqual(r, ['/tmp/workdir/test1', '/tmp/workdir/test2'])
     self.assertEqual(self.scpcopy.get.call_count, 2)
 
-class HttpFileUploaderTestCase(unittest.TestCase):
+
+class UploadTestCase(unittest.TestCase):
 
   def setUp(self):
     self.log = logging.getLogger(__name__)
 
   @mock.patch('httpuploader.requests')
-  def test_upload_single_file(self, mock_request):
+  def test_upload(self, mock_request):
     open_name = '%s.open' % __name__
     mock_request.post = mock.Mock()
-
-    self.httpuploader = HttpUploader()
     with mock.patch(open_name, create=True) as mock_open:
       mock_open.return_value = mock.MagicMock(spec=file)
-      self.httpuploader.upload(url='/api/v1/upload', files={'file': open('report.xls', 'rb')})
+      files = {'file': open('report.xls', 'rb')}
+      result = Upload(files).to(url='/api/v1/upload').doit()
       mock_request.post.assert_called_once_with(url='/api/v1/upload', files={'file': open('report.xls', 'rb')})
+
+
+

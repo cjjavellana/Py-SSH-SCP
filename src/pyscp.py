@@ -1,8 +1,8 @@
-import requests
 import sys, os, logging.config, yaml
 import logging
 import argparse
 
+from httpuploader import Upload
 from fabric import Connection
 
 logger = None
@@ -44,8 +44,13 @@ def copy(options):
     scpcopy = ScpCopy(c)
     return scpcopy.get_matches(options.remotedir, options.filename, options.workdir)
 
-def upload(files, options):
-  pass
+def upload(filelist, options):
+  if options.upload_endpoint is None or filelist is None:
+    raise Exception('Upload Endpoint or files must not be none')
+
+  files = [('file', open(f, 'rb')) for f in filelist]
+  result = Upload(files).to(options.upload_endpoint).doit()
+  logger.info("Upload Result {}".format(result))
 
 def setup_logging(
     default_path='logging.yaml',
