@@ -2,7 +2,7 @@ FROM centos:7
 
 USER root
 
-RUN yum install -y epel-release 
+RUN yum install -y epel-release && \
 yum install -y gcc && \
 yum install -y python-devel && \
 yum install -y mysql-devel && \
@@ -15,4 +15,8 @@ ADD src/logging.yaml /app/deploy
 ADD src/pyscp.py /app/deploy
 ADD src/scpcopy.py /app/deploy
 ADD src/httpuploader.py /app/deploy
+ADD requirements.txt /app/deploy
 
+WORKDIR /app/deploy
+
+RUN pip install -r /app/deploy/requirements.txt
