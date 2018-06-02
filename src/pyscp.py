@@ -27,6 +27,9 @@ def parse_args(argv):
   parser.add_argument('--uploadendpoint', metavar='/api/v1/upload', 
     help='The API Server to upload the files to after copying it from the remote host', 
     dest="upload_endpoint")
+  parser.add_argument('--workdir', 
+    help='The local directory to stage downloaded files', default='/tmp/workdir',
+    dest="workdir")
   return parser.parse_args()
 
 def copy(options):
@@ -34,16 +37,11 @@ def copy(options):
   from scpcopy import ScpCopy
 
   logger.info("{} {} {} {}".format(options.host, options.port, options.filename, options.upload_endpoint))
-  connection = Connection(options.host, 
-    user=options.user, 
-    port=options.port,
-    connect_timeout=10,
-    connect_kwargs={"key_filename": options.keyfile})
-  scpcopy = ScpCopy(connection)
-  #scpcopy.get('{}/{}'.format(options.remotedir, options.filename), '/tmp/tes3.txt')
-  scpcopy.get_matches(options.remotedir, options.filename)
-  connection.close()
-
+  with Connection(options.host, user=options.user, port=options.port,
+    connect_timeout=10, connect_kwargs={"key_filename": options.keyfile}) as c:
+    scpcopy = ScpCopy(c)
+    scpcopy.get_matches(options.remotedir, options.filename, options.workdir)
+  
 def setup_logging(
     default_path='logging.yaml',
     default_level=logging.INFO,
