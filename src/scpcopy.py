@@ -1,4 +1,5 @@
 import logging
+import os
 from fabric import Connection
 
 class ScpCopy(object):
@@ -24,8 +25,15 @@ class ScpCopy(object):
     '''
     files = self._listfiles(remotedir, filepattern)
     self.logger.info('Search Result for {}/{} => {}'.format(remotedir, filepattern, files))
+
     for f in files:
       self.get(f, local)
+
+    base = os.getcwd() if local is None else local
+    if not base.endswith(os.sep):
+      base = ''.join([base, '/'])
+
+    return [''.join([base, os.path.basename(f)]) for f in files]
 
   def _listfiles(self, remotedir, filepattern):
     r = self.connection.run('for f in `ls {}/{}`; do echo $f; done;'.format(remotedir, filepattern),

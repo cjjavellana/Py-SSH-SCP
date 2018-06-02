@@ -28,7 +28,8 @@ class RemoteFileCopyTestCase(unittest.TestCase):
     self.connection.run = mock.Mock()
     self.scpcopy._listfiles = mock.MagicMock(return_value=['/tmp/test1', '/tmp/test2'])
     self.scpcopy.get = mock.Mock()
-    self.scpcopy.get_matches('/tmp', 'tes*')
+    r = self.scpcopy.get_matches('/tmp', 'tes*', '/tmp/workdir')
+    self.assertEqual(r, ['/tmp/workdir/test1', '/tmp/workdir/test2'])
     self.assertEqual(self.scpcopy.get.call_count, 2)
 
 class HttpFileUploaderTestCase(unittest.TestCase):

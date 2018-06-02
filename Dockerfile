@@ -16,4 +16,3 @@ ADD src/pyscp.py /app/deploy
 ADD src/scpcopy.py /app/deploy
 ADD src/httpuploader.py /app/deploy
 
-
