@@ -1,0 +1,22 @@
+2018-06-02 11:14:23,861 - root - INFO - 192.168.1.127 22 bloomberg* http://xxxx.xxx/api/v1/upload
+2018-06-02 11:14:23,885 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_7.6)
+2018-06-02 11:14:23,965 - paramiko.transport - INFO - Authentication (publickey) successful!
+2018-06-02 11:14:30,137 - root - INFO - 192.168.1.127 22 bloomberg* http://xxxx.xxx/api/v1/upload
+2018-06-02 11:14:30,161 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_7.6)
+2018-06-02 11:14:30,238 - paramiko.transport - INFO - Authentication (publickey) successful!
+2018-06-02 11:16:27,948 - root - INFO - 192.168.1.127 22 bloomberg* http://xxxx.xxx/api/v1/upload
+2018-06-02 11:16:27,979 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_7.6)
+2018-06-02 11:16:28,058 - paramiko.transport - INFO - Authentication (publickey) successful!
+2018-06-02 11:17:04,875 - root - INFO - 192.168.1.127 22 bloomberg* http://xxxx.xxx/api/v1/upload
+2018-06-02 11:17:04,899 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_7.6)
+2018-06-02 11:17:04,980 - paramiko.transport - INFO - Authentication (publickey) successful!
+2018-06-02 11:17:46,145 - __main__ - INFO - 192.168.1.127 22 bloomberg* http://xxxx.xxx/api/v1/upload
+2018-06-02 11:17:46,170 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_7.6)
+2018-06-02 11:17:46,247 - paramiko.transport - INFO - Authentication (publickey) successful!
+2018-06-02 11:18:13,106 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_7.6)
+2018-06-02 11:18:13,198 - paramiko.transport - INFO - Authentication (publickey) successful!
+2018-06-02 11:18:32,474 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_7.6)
+2018-06-02 11:18:32,559 - paramiko.transport - INFO - Authentication (publickey) successful!
+2018-06-02 11:19:28,889 - __main__ - INFO - 192.168.1.127 22 bloomberg* http://xxxx.xxx/api/v1/upload
+2018-06-02 11:19:28,913 - paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_7.6)
+2018-06-02 11:19:29,008 - paramiko.transport - INFO - Authentication (publickey) successful!

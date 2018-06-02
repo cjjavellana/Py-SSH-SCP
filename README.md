@@ -23,6 +23,9 @@ $ pip install --no-index --find-links=/tmp/SomePackage SomePackage
 ```
 
 ## Miscellaneous
-1. https://s3-ap-southeast-1.amazonaws.com/s3-file-upload-temp-repo/py-deps.tar.gz  
-2. https://s3-ap-southeast-1.amazonaws.com/s3-file-upload-temp-repo/py-mysql-deps_latest.tar.gz  
-3. https://s3-ap-southeast-1.amazonaws.com/s3-file-upload-temp-repo/yumcache.tar.gz
+If you have faced the error on MacOS X, here's the quick fix - add these lines to your ~/.bash_profile:
+```bash  
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+```
+Credit goes to: https://coderwall.com/p/-k_93g/mac-os-x-valueerror-unknown-locale-utf-8-in-python
