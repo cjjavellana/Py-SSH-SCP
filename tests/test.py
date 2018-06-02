@@ -17,12 +17,19 @@ class RemoteFileCopyTestCase(unittest.TestCase):
     self.scpcopy = ScpCopy(self.connection)
 
   def test_copy_file_to_current_workdir(self):
-    self.scpcopy.get('/tmp/file.txt')
-    self.connection.get.assert_called_once_with('/tmp/file.txt', None)
+    self.scpcopy.get('/tmp/remote_to_current_workdir.txt')
+    self.connection.get.assert_called_once_with('/tmp/remote_to_current_workdir.txt', None)
 
   def test_copy_file_with_local_dest(self):
-    self.scpcopy.get('/tmp/file.txt', '/tmp')
-    self.connection.get.assert_called_once_with('/tmp/file.txt', '/tmp')
+    self.scpcopy.get('/tmp/remote_to_tmp.txt', '/tmp')
+    self.connection.get.assert_called_once_with('/tmp/remote_to_tmp.txt', '/tmp')
+
+  def test_copy_matching_files(self):
+    self.connection.run = mock.Mock()
+    self.scpcopy._listfiles = mock.MagicMock(return_value=['/tmp/test1', '/tmp/test2'])
+    self.scpcopy.get = mock.Mock()
+    self.scpcopy.get_matches('/tmp', 'tes*')
+    self.assertEqual(self.scpcopy.get.call_count, 2)
 
 class HttpFileUploaderTestCase(unittest.TestCase):
 

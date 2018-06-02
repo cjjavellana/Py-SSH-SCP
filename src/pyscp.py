@@ -5,12 +5,15 @@ import argparse
 
 from fabric import Connection
 
+logger = None
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
 def parse_args(argv):
   parser = argparse.ArgumentParser(description='Parse command line arguments')
   parser.add_argument('--host', metavar='hostname', help='The remote host', 
     dest='host')
+  parser.add_argument('--user', metavar='user', help='The user to authenticate with on the remove host', 
+    dest='user')
   parser.add_argument('--port', metavar='22', type=int, 
     default=22, help='The port on the remote host. (Default 22)', dest="port")
   parser.add_argument('--keyfile', metavar='id_rsa', 
@@ -25,6 +28,21 @@ def parse_args(argv):
     help='The API Server to upload the files to after copying it from the remote host', 
     dest="upload_endpoint")
   return parser.parse_args()
+
+def copy(options):
+  global logger
+  from scpcopy import ScpCopy
+
+  logger.info("{} {} {} {}".format(options.host, options.port, options.filename, options.upload_endpoint))
+  connection = Connection(options.host, 
+    user=options.user, 
+    port=options.port,
+    connect_timeout=10,
+    connect_kwargs={"key_filename": options.keyfile})
+  scpcopy = ScpCopy(connection)
+  #scpcopy.get('{}/{}'.format(options.remotedir, options.filename), '/tmp/tes3.txt')
+  scpcopy.get_matches(options.remotedir, options.filename)
+  connection.close()
 
 def setup_logging(
     default_path='logging.yaml',
@@ -47,13 +65,11 @@ def setup_logging(
         logging.basicConfig(level=default_level)
 
 def main():
+  global logger
+
   logger = logging.getLogger(__name__)
   options = parse_args(sys.argv[1:])
-  logger.info("{} {} {} {}".format(options.host, options.port, options.filename, options.upload_endpoint))
-  connection = Connection('192.168.1.127', connect_kwargs={
-    "key_filename": dir_path + '/../keys/fabtest'
-    })
-  connection.run('uname -a')
+  copy(options)
 
 setup_logging()
 if __name__ == '__main__':
