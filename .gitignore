@@ -4,3 +4,4 @@ py-mysql-deps_latest.tar.gz
 deps
 keys
 venv
+*.pyc
