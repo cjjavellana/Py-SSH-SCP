@@ -29,6 +29,9 @@ RUN yum install -y epel-release -C && \
  pip install --no-index --find-links=/tmp/Flask-Script Flask-Script && \
  pip install --no-index --find-links=/tmp/Flask-WTF Flask-WTF && \
  pip install --no-index --find-links=/tmp/redis redis && \
- pip install --no-index --find-links=/tmp/mockredispy mockredispy
+ pip install --no-index --find-links=/tmp/mockredispy mockredispy && \
+ pip install --no-index --find-links=/tmp/yaml yaml
+ pip install --no-index --find-links=/tmp/requests requests
+ pip install --no-index --find-links=/tmp/gunicorn gunicorn
 
 

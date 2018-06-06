@@ -14,6 +14,9 @@ RUN sed -i -e 's/keepcache=0/keepcache=1/g' /etc/yum.conf && \
   pip wheel --wheel-dir=/tmp/wheel wheel && \
   pip install wheel && \
   pip wheel --wheel-dir=/tmp/fabric fabric && \
+  pip wheel --wheel-dir=/tmp/gunicorn gunicorn && \
+  pip wheel --wheel-dir=/tmp/requests requests && \
+  pip wheel --wheel-dir=/tmp/yaml yaml && \
   pip wheel --wheel-dir=/tmp/MySQL-python MySQL-python && \
   pip wheel --wheel-dir=/tmp/Flask Flask && \
   pip wheel --wheel-dir=/tmp/Flask-Migrate Flask-Migrate && \
@@ -29,5 +32,6 @@ RUN sed -i -e 's/keepcache=0/keepcache=1/g' /etc/yum.conf && \
   cd /tmp && \
   tar czvf /tmp/py-deps.tar.gz MySQL-python fabric wheel Flask \
     Flask-Migrate Flask-Moment Flask-Redis Flask-SQLAlchemy \
-    Flask-Script Flask-WTF redis mockredispy
+    Flask-Script Flask-WTF redis mockredispy gunicorn requests \
+    yaml
 
