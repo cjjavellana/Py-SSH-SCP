@@ -1,5 +1,4 @@
 .vagrant
-py-mysql-deps_latest.tar.gz
 .DS_Store
 deps
 keys
