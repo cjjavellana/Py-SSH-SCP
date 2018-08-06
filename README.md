@@ -29,3 +29,19 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 ```
 Credit goes to: https://coderwall.com/p/-k_93g/mac-os-x-valueerror-unknown-locale-utf-8-in-python
+
+## Converting UTC to Local Time
+```python
+from datetime import datetime
+from dateutil import tz
+
+from_zone = tz.gettz('UTC')
+to_zone = tz.gettz('Asia/Singapore')
+
+utc = datetime.now()
+utc = utc.replace(tzinfo=from_zone)
+
+singapore = utc.astimezone(to_zone)
+print singapore.strftime('%d-%m-%Y %H:%M:%S')
+
+```

@@ -1,0 +1,34 @@
+FROM centos:7
+
+USER root
+
+ADD deps/py-deps.tar.gz /tmp
+ADD deps/yumcache.tar.gz /var/cache
+
+# RUN yum install -y wget && \
+# cd /tmp && \
+# wget https://s3-ap-southeast-1.amazonaws.com/s3-file-upload-temp-repo/py-deps.tar.gz && \
+# wget https://s3-ap-southeast-1.amazonaws.com/s3-file-upload-temp-repo/yumcache.tar.gz && \
+# tar xzvf yumcache.tar.gz -C /var/cache && \
+# tar xzvf py-deps.tar.gz -C /tmp
+
+# install from cache
+RUN yum install -y epel-release -C && \
+ yum install -y python-setuptools -C && \
+ yum install -y python-pip -C && \
+ yum install -y openssh-clients -C && \
+ yum install -y python-devel -C && \
+ yum install -y mysql-devel -C && \
+ pip install --no-index --find-links=/tmp/fabric fabric && \
+ pip install --no-index --find-links=/tmp/MySQL-python MySQL-python && \
+ pip install --no-index --find-links=/tmp/Flask Flask && \
+ pip install --no-index --find-links=/tmp/Flask-Migrate Flask-Migrate && \
+ pip install --no-index --find-links=/tmp/Flask-Moment Flask-Moment && \
+ pip install --no-index --find-links=/tmp/Flask-Redis Flask-Redis && \
+ pip install --no-index --find-links=/tmp/Flask-SQLAlchemy Flask-SQLAlchemy && \
+ pip install --no-index --find-links=/tmp/Flask-Script Flask-Script && \
+ pip install --no-index --find-links=/tmp/Flask-WTF Flask-WTF && \
+ pip install --no-index --find-links=/tmp/redis redis && \
+ pip install --no-index --find-links=/tmp/mockredispy mockredispy
+
+
