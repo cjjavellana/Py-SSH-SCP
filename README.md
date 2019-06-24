@@ -45,3 +45,6 @@ singapore = utc.astimezone(to_zone)
 print singapore.strftime('%d-%m-%Y %H:%M:%S')
 
 ```
+
+## Chillax 
+https://s3-file-upload-temp-repo.s3-ap-southeast-1.amazonaws.com/Screenshot+2019-06-25+at+6.47.21+AM.png
